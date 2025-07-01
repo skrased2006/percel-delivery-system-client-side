@@ -13,6 +13,14 @@ import DashBoardLayout from "../layouts/DashBoardLayout";
 import MyParcel from "../pages/DashBoard/MyParcel";
 import Payment from "../pages/Payment/Payment";
 import PaymentHistory from "../pages/DashBoard/PaymentHistory";
+import BeArider from "../pages/BeARider/BeArider";
+import PendingRider from "../pages/PendingRider/PendingRider";
+import ActiveRider from "../pages/ActiveRider/ActiveRider";
+import MakeAdmin from "../pages/MakeAdmin/MakeAdmin";
+import Forbidden from "../pages/Forbidden/Forbidden";
+import AdminRoute from "./AdminRoute";
+import AssignRider from "../pages/AssignRider/AssignRider";
+
 
 
 export const router = createBrowserRouter([
@@ -28,6 +36,17 @@ export const router = createBrowserRouter([
         path: 'covarage',
         Component: Covarage,
         loader: () => fetch('/public/warehouses.json')
+      },
+      {
+        path: 'forbidden',
+        Component: Forbidden
+
+      },
+      {
+        path: 'beArider',
+        element: <PrivetRoute><BeArider></BeArider></PrivetRoute>,
+        loader: () => fetch('/public/warehouses.json')
+
       },
       {
         path: 'sendPercel',
@@ -67,6 +86,22 @@ export const router = createBrowserRouter([
       {
         path: 'paymentHistory',
         element: <PaymentHistory></PaymentHistory>
+      },
+      {
+        path: 'pending-riders',
+        element: <AdminRoute><PendingRider></PendingRider></AdminRoute>
+      },
+      {
+        path: 'active-riders',
+        element: <AdminRoute> <ActiveRider></ActiveRider></AdminRoute>
+      },
+      {
+        path: 'makeAdmin',
+        element: <AdminRoute><MakeAdmin></MakeAdmin></AdminRoute>
+      },
+      {
+        path: 'assig-rider',
+        element: <AdminRoute><AssignRider></AssignRider></AdminRoute>
       }
     ]
   }

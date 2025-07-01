@@ -1,8 +1,13 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router';
 import ProfastLogo from '../pages/shared/ProfastLogo/ProfastLogo';
-import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaSearchLocation } from 'react-icons/fa';
+import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaSearchLocation, FaUserCheck, FaUserClock, FaUserShield, FaMotorcycle } from 'react-icons/fa';
+import useUserRole from '../hooks/useUserRole';
 const DashboardLayout = () => {
+
+  const { role, roleLoading } = useUserRole();
+
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -70,9 +75,41 @@ const DashboardLayout = () => {
               Update Profile
             </NavLink>
           </li>
+
+          {/* riders link */}
+          {!roleLoading && role === 'admin' &&
+            <>
+              <li>
+                <NavLink to="/dashBoard/active-riders">
+                  <FaUserCheck className="inline-block mr-2" />
+                  Active Riders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashBoard/pending-riders">
+                  <FaUserClock className="inline-block mr-2" />
+                  Pending Riders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashBoard/makeAdmin">
+                  <FaUserShield className="inline-block mr-2" />
+                  Make Admin
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashBoard/assig-rider">
+                  <FaMotorcycle className="inline-block mr-2" />
+                  Assign Rider
+                </NavLink>
+              </li>
+
+
+            </>
+          }
         </ul>
       </div>
-    </div>
+    </div >
   );
 };
 
